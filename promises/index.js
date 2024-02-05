@@ -50,40 +50,40 @@ async function main(){
     }
 }
 
-// const util = require('util')
-// const async = util.promisify(obterEndereco)
+const util = require('util')
+const async = util.promisify(obterEndereco)
 
-// const usuarioPromise = obterUsuario()
-// usuarioPromise
-//     .then(function (resultado){
-//         console.log(resultado)
-//         return obterTelefone(resultado.cel)
-//         .then(function resolverTelefone(result){
-//             return {
-//                 usuario:{
-//                     id: 1,
-//                     nome: 'joao',
-//                 },
-//                 telefone: result
-//             }
-//         })
-//     })
-//     .then(function (resultado){
-//         const endereco = async(resultado.usuario.id)
-//         return endereco.then( function resolverEndereco(result){
-//             return {
-//                 usuario: resultado.usuario,
-//                 telefone: resultado.telefone,
-//                 endereco: result
-//             }
-//         })
-//     })
-//     .then(function (resultado) {
-//         console.log('aqui esta o resultado:', resultado)
-//     })
-//     .catch(function (error){
-//         console.error('DEU RUIM', error)
-//     })
+const usuarioPromise = obterUsuario()
+usuarioPromise
+    .then(function (resultado){
+        console.log(resultado)
+        return obterTelefone(resultado.cel)
+        .then(function resolverTelefone(result){
+            return {
+                usuario:{
+                    id: 1,
+                    nome: 'joao',
+                },
+                telefone: result
+            }
+        })
+    })
+    .then(function (resultado){
+        const endereco = async(resultado.usuario.id)
+        return endereco.then( function resolverEndereco(result){
+            return {
+                usuario: resultado.usuario,
+                telefone: resultado.telefone,
+                endereco: result
+            }
+        })
+    })
+    .then(function (resultado) {
+        console.log('aqui esta o resultado:', resultado)
+    })
+    .catch(function (error){
+        console.error('DEU RUIM', error)
+    })
     // O primeiro then recebe o resultado da primeira Promise (obterUsuario). Ele imprime o resultado no console e retorna a Promise resultante da chamada obterTelefone(resultado.cel).
 
     // O segundo then recebe o resultado da segunda Promise (obterTelefone(resultado.cel)), que é o valor retornado pelo primeiro then. Ele imprime o resultado no console.
@@ -94,39 +94,39 @@ async function main(){
 
 
 
-// function obterEndereco(userId, callback){
-//     setTimeout(()=> {
-//         return callback(null,  {
-//             rua: 'vila moda',
-//         })
-//     },2000)
-// }
+function obterEndereco(userId, callback){
+    setTimeout(()=> {
+        return callback(null,  {
+            rua: 'vila moda',
+        })
+    },2000)
+}
 
-// function resolverUsuario (erro, usuario)  {
-//     console.log('usuario', usuario)
-// }
+function resolverUsuario (erro, usuario)  {
+    console.log('usuario', usuario)
+}
 
 
-// gerarUsuario(function resolverUsuario(error, usuario){
-//     if(error){
-//         console.log('usuário deu erro', error)
-//         return;
-//     }
-//     pegarTelefone(usuario.id, function resolverUsuario(error1, telefone){
-//         if(error1){
-//             console.log('telefone deu erro', error)
-//             return;
-//         }
-//         obterEndereco(usuario.id, function resolverEndereco(error2, endereco){
-//             if(error2){
-//                 console.log('Endereco deu erro', error)
-//                 return;
-//             }
-//             console.log(`
-//                 Nome: ${usuario.nome},
-//                 Endereço: ${endereco.rua},
-//                 Telefone: ${telefone.cel},
-//             `)
-//         })
-//     }) 
-// })
+gerarUsuario(function resolverUsuario(error, usuario){
+    if(error){
+        console.log('usuário deu erro', error)
+        return;
+    }
+    pegarTelefone(usuario.id, function resolverUsuario(error1, telefone){
+        if(error1){
+            console.log('telefone deu erro', error)
+            return;
+        }
+        obterEndereco(usuario.id, function resolverEndereco(error2, endereco){
+            if(error2){
+                console.log('Endereco deu erro', error)
+                return;
+            }
+            console.log(`
+                Nome: ${usuario.nome},
+                Endereço: ${endereco.rua},
+                Telefone: ${telefone.cel},
+            `)
+        })
+    }) 
+})

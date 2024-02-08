@@ -19,7 +19,8 @@ const validateData = (payload: any):Client => {
 const createClient = (request: Request, response: Response) : Response => {
     try {
         const validatedData: Client = validateData(request.body);
-        return response.status(201).json(validatedData)
+        const userCreate = clients.push(validatedData)
+        return response.status(201).json(userCreate)
     } catch (error: unknown) {
         if (error instanceof Error) {
             return response.status(400).json({message: error.message})
